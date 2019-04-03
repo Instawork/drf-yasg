@@ -260,8 +260,9 @@ class Swagger(SwaggerDict):
             assert url.netloc and url.scheme, "if given, url must have both schema and netloc"
             self.host = url.netloc
             self.schemes = [url.scheme]
-
-        self.base_path = self.get_base_path(get_script_prefix(), _prefix)
+            self.base_path = url.path
+        else:
+            self.base_path = self.get_base_path(get_script_prefix(), _prefix)
         self.consumes = consumes
         self.produces = produces
         self.security_definitions = filter_none(security_definitions)
